@@ -23,11 +23,16 @@ describe DockingStation do
 
 
   describe '#release_bike' do
-  # it 'responds to #release_bike' do
-  #   expect(subject).to respond_to :release_bike
-  # end
-  # # one-liner syntax
-  # it { is_expected.to respond_to :release_bike }
+    # it 'responds to #release_bike' do
+    #   expect(subject).to respond_to :release_bike
+    # end
+    # # one-liner syntax
+    # it { is_expected.to respond_to :release_bike }
+    it 'releases a working bike even if a broken bike was last docked' do
+      subject.dock(bike)
+      subject.dock(broken_bike)
+      expect(subject.release_bike).to eq(bike)
+    end
 
     it 'raises an error when there are no bikes available' do
       # we don't want to dock a bike first obviously
@@ -50,15 +55,20 @@ describe DockingStation do
     # it { is_expected.to respond_to :dock(bike) }
     it { is_expected.to respond_to(:dock).with(1).argument }
 
+    it 'allows both working and broken bikes to be docked' do
+      subject.dock(bike)
+      subject.dock(broken_bike)
+      expect([subject.bikes.last, subject.broken_bikes.last]).to eq([bike, broken_bike])
+    end
+
     it 'raises an error when full' do
       # 20.times { subject.dock(Bike.new) }
-        DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
-        # We are using :: as a 'Namespace operator'
-        # We use it to access the DEFAULT_CAPACITY constant
+      # DockingStation::DEFAULT_CAPACITY.times { subject.dock(Bike.new) }
+# # :: is a 'Namespace operator' used to access the DEFAULT_CAPACITY constant
       # expect { subject.dock Bike.new }.to raise_error 'Docking station full'
-      expect { subject.dock(bike) }.to raise_error 'Docking station full'
+    subject.capacity.times { subject.dock(bike) }
+    expect { subject.dock(bike) }.to raise_error 'Docking station full'
     end
   end
-
 
 end

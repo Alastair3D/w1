@@ -10,13 +10,13 @@ class DockingStation
     @broken_bikes = []
   end
 
-attr_reader :bikes #this essentially writes: def bike/@bike/end and...
-# enables us to read the @bike attribute on any instance of the Bike class
-# This 'attribute (instance variable) reader' gives us a RV of the inst. var
+attr_reader :bikes # equivalent to: def bike/@bike/end.  It enables us to...
+# read the @bike attribute on any instance of the Bike class
 attr_reader :capacity
+#  attribute readers should be called instance variable readers
+#  they each create a method enabling us access/read the RV of the inst. var
 attr_accessor :broken_bikes  #this is a setter or writer i.e. a writeable
 
-DEFAULT_CAPACITY = 20
 
   def release_bike
     fail 'No bikes available' if @bikes.empty? && @broken_bikes.empty?

@@ -2,16 +2,13 @@ require 'bike'
 
 describe Bike do
 
-  it 'responds to working?' do
-    expect(subject).to respond_to :working?
+  it 'checks working status initialized as true' do
+    expect(subject.working).to eq true
   end
 
-  it { is_expected.to respond_to :working? }
-
   it 'can be reported broken' do
-    subject.report_broken
-    # let's use one of RSpec's predicate matchers
-    expect(subject).to be_broken
+    subject.working = false
+    expect(subject.working).to eq false
   end
 
 end

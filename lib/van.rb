@@ -24,4 +24,10 @@ class Van
     @bikes
   end
 
+  def distribute_repaired_bikes(station)
+    fail 'No repaired bikes to distribute' if @bikes.empty?
+    station.bikes.concat @bikes
+    @bikes.clear
+    @bikes
+  end
 end

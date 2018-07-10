@@ -30,8 +30,17 @@ let(:garage_fixed) {double :garage_fixed, bikes: [bike]}
   end
 
   describe '#collect_repaired_bikes' do
-    it 'returns repaired bikes to docking stations' do
+    it 'picks up repaired bikes from the garage' do
       expect(subject.collect_repaired_bikes(garage_fixed)).to eq [bike]
     end
   end
+
+  # describe '#distribute_repaired_bikes' do
+  #   it 'returns repaired bikes to a station' do
+  #     expect(subject.distribute_repaired_bikes(station)).to eq []
+  #   end
+  #   it 'raises an error when there are no broken bikes to distribute' do
+  #     expect(subject.distribute_repaired_bikes(garage)).to raise_error "No repaired bikes to distribute"
+  #   end
+  # end
 end
